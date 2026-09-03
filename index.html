@@ -3,86 +3,135 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sonidos de los Animales</title>
+  <title>Sonidos de los Animales - Retro Pixel</title>
+
+  <!-- Fuente Retro Pixel Art -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --primary: #4CAF50;
-      --primary-dark: #388E3C;
-      --secondary: #FF9800;
-      --bg-color: #f0f8ff;
-      --card-bg: #ffffff;
-      --text-color: #333333;
+      --pixel-yellow: #ffcc00;
+      --pixel-amber: #ff9800;
+      --pixel-green: #38b764;
+      --pixel-red: #ff0055;
+      --pixel-cyan: #00f0ff;
+      --ui-dark: rgba(14, 16, 27, 0.9);
+      --ui-border: #000000;
+      --text-main: #f4f4f4;
+      --shadow-block: 4px 4px 0px #000000;
+      --shadow-block-lg: 6px 6px 0px #000000;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      image-rendering: pixelated;
     }
 
     body {
-      background-color: var(--bg-color);
-      color: var(--text-color);
+      font-family: 'Press Start 2P', monospace;
+      color: var(--text-main);
+      background-color: #04040c;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 20px;
+      padding: 2.5rem 1rem 4rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Fondo Nebulosa Carina en Pixel Art */
+    #spaceCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
     }
 
     header {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 2rem;
+    }
+
+    /* Títulos pixel art amarillos */
+    h1, h2, .pixel-title {
+      font-family: 'Press Start 2P', monospace !important;
+      color: var(--pixel-yellow) !important;
+      text-shadow: 3px 3px 0px #000000 !important;
+      letter-spacing: -0.05em;
     }
 
     h1 {
-      color: var(--primary-dark);
-      font-size: 2.2rem;
-      margin-bottom: 10px;
+      font-size: 1.4rem;
+      line-height: 1.5;
+    }
+
+    h2 {
+      font-size: 0.8rem;
+      line-height: 1.6;
+      margin-bottom: 0.8rem;
     }
 
     nav {
       display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
+      gap: 12px;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     .nav-btn {
-      padding: 12px 24px;
-      font-size: 1rem;
-      font-weight: bold;
-      border: none;
-      border-radius: 25px;
+      font-family: inherit;
+      padding: 10px 16px;
+      font-size: 0.65rem;
+      border: 3px solid var(--ui-border);
       cursor: pointer;
-      background-color: #e0e0e0;
-      color: #666;
-      transition: all 0.3s ease;
+      background-color: var(--ui-dark);
+      color: var(--text-main);
+      box-shadow: var(--shadow-block);
+      transition: none;
+    }
+
+    .nav-btn:hover {
+      background-color: var(--pixel-amber);
+      color: #000;
+      transform: translate(-2px, -2px);
+      box-shadow: var(--shadow-block-lg);
     }
 
     .nav-btn.active {
-      background-color: var(--primary);
-      color: white;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      background-color: var(--pixel-yellow);
+      color: #000;
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0px #000;
     }
 
     .instance-container {
       width: 100%;
       max-width: 600px;
-      background: var(--card-bg);
-      border-radius: 20px;
-      padding: 25px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      background: var(--ui-dark);
+      border: 4px solid var(--ui-border);
+      padding: 24px;
+      box-shadow: var(--shadow-block-lg);
       display: none;
       flex-direction: column;
       align-items: center;
+      backdrop-filter: blur(4px);
     }
 
     .instance-container.active {
       display: flex;
     }
 
-    /* --- INSTANCIA 1: EXPLORAR --- */
+    /* Instancia 1: Exploración */
     .carousel {
       width: 100%;
       display: flex;
@@ -93,35 +142,37 @@
     .animal-card {
       width: 100%;
       max-width: 320px;
-      height: 280px;
-      border-radius: 15px;
+      height: 290px;
+      border: 4px solid var(--ui-border);
       overflow: hidden;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+      box-shadow: var(--shadow-block);
       cursor: pointer;
       position: relative;
-      transition: transform 0.2s;
-      background: #fafafa;
+      background: #090a12;
     }
 
     .animal-card:hover {
-      transform: scale(1.03);
+      transform: translate(-2px, -2px);
+      box-shadow: var(--shadow-block-lg);
     }
 
     .animal-card img {
       width: 100%;
-      height: 80%;
+      height: 75%;
       object-fit: cover;
+      display: block;
+      border-bottom: 4px solid var(--ui-border);
     }
 
     .animal-card .name {
-      height: 20%;
+      height: 25%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.4rem;
-      font-weight: bold;
-      background-color: #fff;
-      color: var(--primary-dark);
+      font-size: 0.9rem;
+      background-color: #10121c;
+      color: var(--pixel-cyan);
+      text-shadow: 2px 2px 0px #000;
     }
 
     .controls {
@@ -129,35 +180,41 @@
       justify-content: space-between;
       align-items: center;
       width: 100%;
-      margin-top: 20px;
-    }
-
-    .btn {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 10px;
-      background-color: var(--secondary);
-      color: white;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .btn:hover {
-      filter: brightness(0.9);
-    }
-
-    .sound-btn {
-      background-color: var(--primary);
-      padding: 12px 25px;
-      font-size: 1.1rem;
-      display: flex;
-      align-items: center;
+      margin-top: 24px;
       gap: 8px;
     }
 
-    /* --- INSTANCIA 2: JUEGO --- */
+    .btn {
+      font-family: inherit;
+      padding: 10px 14px;
+      border: 3px solid var(--ui-border);
+      background-color: var(--pixel-amber);
+      color: #000;
+      font-size: 0.65rem;
+      cursor: pointer;
+      box-shadow: var(--shadow-block);
+    }
+
+    .btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: var(--shadow-block-lg);
+      background-color: var(--pixel-yellow);
+    }
+
+    .btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: none;
+    }
+
+    .sound-btn {
+      background-color: var(--pixel-green);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Instancia 2: Adivinar */
     .game-header {
       width: 100%;
       text-align: center;
@@ -174,93 +231,101 @@
 
     .option-card {
       height: 140px;
-      border-radius: 12px;
+      border: 4px solid var(--ui-border);
       overflow: hidden;
-      border: 4px solid transparent;
       cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      transition: transform 0.2s, border-color 0.2s;
+      box-shadow: var(--shadow-block);
+      background: #090a12;
     }
 
     .option-card:hover {
-      transform: scale(1.02);
+      transform: translate(-2px, -2px);
+      box-shadow: var(--shadow-block-lg);
     }
 
     .option-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
     }
 
     .option-card.correct {
-      border-color: #4CAF50;
-      animation: pulse 0.5s;
+      border-color: var(--pixel-green);
+      box-shadow: 0 0 0 4px var(--pixel-green);
     }
 
     .option-card.wrong {
-      border-color: #F44336;
-      opacity: 0.5;
+      border-color: var(--pixel-red);
+      opacity: 0.4;
     }
 
     .feedback {
-      min-height: 30px;
-      margin-top: 15px;
-      font-size: 1.2rem;
-      font-weight: bold;
+      min-height: 28px;
+      margin-top: 20px;
+      font-size: 0.65rem;
+      line-height: 1.6;
       text-align: center;
+      text-shadow: 2px 2px 0px #000;
     }
 
     .progress {
-      font-size: 0.9rem;
-      color: #666;
-      margin-top: 5px;
+      font-size: 0.6rem;
+      color: var(--pixel-cyan);
+      margin-top: 8px;
+      text-shadow: 1px 1px 0px #000;
     }
 
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.08); }
-      100% { transform: scale(1); }
+    .subtext {
+      font-size: 0.55rem;
+      line-height: 1.8;
+      color: #94a3b8;
+      margin-bottom: 15px;
+      text-align: center;
     }
   </style>
 </head>
 <body>
 
+  <!-- Lienzo fondo cósmico pixel art -->
+  <canvas id="spaceCanvas"></canvas>
+
   <header>
-    <h1>🔊 Sonidos de los Animales</h1>
+    <h1>🔊 SONIDOS DE LOS ANIMALES</h1>
   </header>
 
   <nav>
-    <button class="nav-btn active" onclick="switchInstance(1)">Instancia 1: Explorar</button>
-    <button class="nav-btn" onclick="switchInstance(2)">Instancia 2: Adivinar</button>
+    <button class="nav-btn active" onclick="switchInstance(1)">1: Explorar</button>
+    <button class="nav-btn" onclick="switchInstance(2)">2: Adivinar</button>
   </nav>
 
   <!-- INSTANCIA 1: EXPLORACIÓN -->
   <div id="instance1" class="instance-container active">
-    <p style="margin-bottom: 15px; color: #666;">Haz clic en la imagen o usa los botones para escuchar el sonido:</p>
+    <p class="subtext">HAZ CLIC EN LA IMAGEN O USA LOS BOTONES PARA REPRODUCIR:</p>
     
     <div class="carousel">
       <div class="animal-card" onclick="playCurrentSound()">
         <img id="exp-img" src="" alt="Animal">
-        <div class="name" id="exp-name">Cargando...</div>
+        <div class="name" id="exp-name">CARGANDO...</div>
       </div>
     </div>
 
     <div class="controls">
-      <button class="btn" onclick="prevAnimal()">◀ Anterior</button>
-      <button class="btn sound-btn" onclick="playCurrentSound()">🔊 Escuchar</button>
-      <button class="btn" onclick="nextAnimal()">Siguiente ▶</button>
+      <button class="btn" onclick="prevAnimal()">◀ ATRÁS</button>
+      <button class="btn sound-btn" onclick="playCurrentSound()">► SONAR</button>
+      <button class="btn" onclick="nextAnimal()">SIG ▶</button>
     </div>
   </div>
 
   <!-- INSTANCIA 2: JUEGO -->
   <div id="instance2" class="instance-container">
     <div class="game-header">
-      <h2>¿Qué animal hace este sonido?</h2>
-      <div class="progress" id="game-progress">Adivinados: 0 / 8</div>
+      <h2>¿QUÉ ANIMAL HACE ESTE SONIDO?</h2>
+      <div class="progress" id="game-progress">ADIVINADOS: 0 / 8</div>
     </div>
 
     <button class="btn sound-btn" style="margin-bottom: 10px;" onclick="playTargetSound()">
-      🔊 Escuchar Sonido De Nuevo
+      ► REPETIR SONIDO
     </button>
 
     <div class="options-grid" id="options-grid"></div>
@@ -269,8 +334,109 @@
   </div>
 
   <script>
-    // Configuración apuntando a los archivos locales en la carpeta "audio/"
-   const ANIMALS = [
+    /* ========================================================
+       FONDO PIXEL ART: NEBULOSA CARINA (JWST)
+       ======================================================== */
+    const canvas = document.getElementById('spaceCanvas');
+    const ctx = canvas.getContext('2d');
+
+    const W = 320;
+    const H = 180;
+    canvas.width = W;
+    canvas.height = H;
+
+    function renderNebula() {
+      // 1. Gradiente del cosmos
+      const skyGrad = ctx.createLinearGradient(0, 0, 0, H * 0.7);
+      skyGrad.addColorStop(0, '#04040c');
+      skyGrad.addColorStop(0.3, '#08112b');
+      skyGrad.addColorStop(0.7, '#0f3254');
+      skyGrad.addColorStop(1, '#1b5a7a');
+      ctx.fillStyle = skyGrad;
+      ctx.fillRect(0, 0, W, H);
+
+      // 2. Gas y polvo cósmico
+      for (let i = 0; i < 400; i++) {
+        const x = Math.floor(Math.random() * W);
+        const y = Math.floor(Math.random() * (H * 0.65));
+        ctx.fillStyle = Math.random() > 0.4 ? 'rgba(34, 130, 175, 0.25)' : 'rgba(235, 130, 60, 0.15)';
+        ctx.fillRect(x, y, 2, 2);
+      }
+
+      // 3. Estrellas con picos de difracción del James Webb
+      const webbStars = [
+        {x: 60, y: 35, s: 2, c: '#ffed75'},
+        {x: 240, y: 40, s: 3, c: '#ffffff'},
+        {x: 180, y: 20, s: 1, c: '#8cedff'},
+        {x: 290, y: 70, s: 2, c: '#ffc857'},
+        {x: 120, y: 65, s: 1, c: '#ffffff'},
+        {x: 30, y: 80, s: 1, c: '#ffaa44'}
+      ];
+
+      webbStars.forEach(st => {
+        ctx.fillStyle = st.c;
+        ctx.fillRect(st.x - st.s, st.y - st.s, st.s * 2, st.s * 2);
+        for (let r = 1; r <= st.s * 4; r++) {
+          ctx.fillRect(st.x + r, st.y, 1, 1);
+          ctx.fillRect(st.x - r, st.y, 1, 1);
+          ctx.fillRect(st.x, st.y + r, 1, 1);
+          ctx.fillRect(st.x, st.y - r, 1, 1);
+          if (r % 2 === 0) {
+            ctx.fillRect(st.x + r/2, st.y + r/2, 1, 1);
+            ctx.fillRect(st.x - r/2, st.y - r/2, 1, 1);
+            ctx.fillRect(st.x + r/2, st.y - r/2, 1, 1);
+            ctx.fillRect(st.x - r/2, st.y + r/2, 1, 1);
+          }
+        }
+      });
+
+      // Estrellas menores
+      for (let s = 0; s < 120; s++) {
+        ctx.fillStyle = Math.random() > 0.3 ? '#ffffff' : '#ffd085';
+        ctx.fillRect(Math.floor(Math.random() * W), Math.floor(Math.random() * (H * 0.7)), 1, 1);
+      }
+
+      // 4. Riscos dorados / Cosmic Cliffs
+      function getMountainHeight(x) {
+        return Math.sin(x * 0.02) * 18 + 
+               Math.cos(x * 0.05) * 10 + 
+               Math.sin(x * 0.1) * 4 + 
+               (H * 0.52);
+      }
+
+      for (let x = 0; x < W; x++) {
+        const peakY = Math.floor(getMountainHeight(x));
+        for (let y = peakY; y < H; y++) {
+          const depth = y - peakY;
+          if (depth === 0) {
+            ctx.fillStyle = (x % 3 === 0) ? '#fff5cc' : '#fca311';
+          } else if (depth < 4) {
+            ctx.fillStyle = '#e85d04';
+          } else if (depth < 10) {
+            ctx.fillStyle = '#dc2f02';
+          } else if (depth < 22) {
+            ctx.fillStyle = '#9d0208';
+          } else if (depth < 45) {
+            ctx.fillStyle = '#370617';
+          } else {
+            ctx.fillStyle = '#140207';
+          }
+
+          if (depth === 2 || depth === 6 || depth === 14 || depth === 28) {
+            if ((x + y) % 2 === 0) ctx.fillStyle = '#03071e';
+          }
+
+          ctx.fillRect(x, y, 1, 1);
+        }
+      }
+    }
+
+    renderNebula();
+
+    /* ========================================================
+       LÓGICA DEL JUEGO DE ANIMALES
+       ======================================================== */
+    const ANIMALS = [
       {
         id: 'perro',
         name: 'Perro',
@@ -299,7 +465,7 @@
         id: 'pollito',
         name: 'Pollito',
         image: 'https://images.unsplash.com/photo-1563281577-a7be47e20db9?auto=format&fit=crop&w=600&q=80',
-        sound: 'pollito.wav' // <-- ¡Corregido! Se eliminó "audio/"
+        sound: 'pollito.wav'
       },
       {
         id: 'gallina',
@@ -323,13 +489,13 @@
 
     let currentAudio = null;
 
-    // --- LÓGICA INSTANCIA 1 ---
+    // Instancia 1
     let currentIndex = 0;
 
     function updateExplorer() {
       const animal = ANIMALS[currentIndex];
       document.getElementById('exp-img').src = animal.image;
-      document.getElementById('exp-name').textContent = animal.name;
+      document.getElementById('exp-name').textContent = animal.name.toUpperCase();
     }
 
     function playCurrentSound() {
@@ -348,7 +514,7 @@
       playCurrentSound();
     }
 
-    // --- LÓGICA INSTANCIA 2 ---
+    // Instancia 2
     let remainingAnimals = [];
     let currentTarget = null;
     let isBlockClicked = false;
@@ -365,14 +531,15 @@
       document.getElementById('feedback').textContent = '';
       
       if (remainingAnimals.length === 0) {
-        document.getElementById('feedback').innerHTML = '🎉 ¡Felicidades! Has adivinado todos los sonidos. ¡Reiniciando ronda!';
+        document.getElementById('feedback').innerHTML = '★ ¡RONDA COMPLETADA! ★';
+        document.getElementById('feedback').style.color = 'var(--pixel-yellow)';
         setTimeout(() => {
           initGame();
         }, 3000);
         return;
       }
 
-      document.getElementById('game-progress').textContent = `Adivinados: ${score} / ${ANIMALS.length}`;
+      document.getElementById('game-progress').textContent = `ADIVINADOS: ${score} / ${ANIMALS.length}`;
 
       const targetIndex = Math.floor(Math.random() * remainingAnimals.length);
       currentTarget = remainingAnimals[targetIndex];
@@ -409,33 +576,31 @@
       if (selectedAnimal.id === currentTarget.id) {
         isBlockClicked = true;
         cardElement.classList.add('correct');
-        document.getElementById('feedback').textContent = '✨ ¡Correcto!';
-        document.getElementById('feedback').style.color = '#4CAF50';
+        document.getElementById('feedback').textContent = '✔ ¡CORRECTO!';
+        document.getElementById('feedback').style.color = 'var(--pixel-green)';
         
         remainingAnimals = remainingAnimals.filter(a => a.id !== currentTarget.id);
         score++;
 
         setTimeout(() => {
           nextRound();
-        }, 1500);
+        }, 1200);
       } else {
         cardElement.classList.add('wrong');
-        document.getElementById('feedback').textContent = '❌ Intenta de nuevo...';
-        document.getElementById('feedback').style.color = '#F44336';
+        document.getElementById('feedback').textContent = '✖ INTENTA OTRA VEZ';
+        document.getElementById('feedback').style.color = 'var(--pixel-red)';
       }
     }
 
-    // --- REPRODUCCIÓN DE AUDIO ---
     function playSound(url) {
       if (currentAudio) {
         currentAudio.pause();
         currentAudio.currentTime = 0;
       }
       currentAudio = new Audio(url);
-      currentAudio.play().catch(e => console.log('Error al reproducir audio:', e));
+      currentAudio.play().catch(e => console.log('Esperando interacción o audio no disponible:', e));
     }
 
-    // --- CAMBIO DE INSTANCIAS ---
     function switchInstance(instanceNum) {
       if (currentAudio) currentAudio.pause();
 
