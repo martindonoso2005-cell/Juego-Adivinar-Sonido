@@ -1,4 +1,4 @@
-# Entrega 2: Juego de Adivinar el Sonido (Experiencia Educativa Interactiva)
+# Juego de Adivinar el Sonido (Experiencia Educativa Interactiva)
 **Asignatura:** Taller de Interfaces (2026) | Universidad Adolfo Ibáñez  
 **Estudiante:** Martín Donoso  
 **Profesor:** Jorge Forero  
